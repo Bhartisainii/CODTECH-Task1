@@ -3,7 +3,7 @@ Company:CODTECH IT SOLUTIONS
 ID:CTO8DS3669
 Domain:SQL
 Duration:1st July to 1st August
-Mentor:
+Mentor:Neela Santosh kumar
 
 
 ## Overview of the project
