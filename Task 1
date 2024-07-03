@@ -1,0 +1,102 @@
+Task ONE - LIBRARY MANAGEMENT SYSTEM 
+
+-- Create Database
+CREATE DATABASE LibraryManagement;
+
+-- Use the created database
+USE LibraryManagement;
+
+-- Create Books Table
+CREATE TABLE Books (
+    BookID INT AUTO_INCREMENT PRIMARY KEY,
+    Title VARCHAR(255) NOT NULL,
+    Author VARCHAR(255) NOT NULL,
+    Genre VARCHAR(100),
+    PublishedYear YEAR,
+    CopiesAvailable INT DEFAULT 0
+);
+
+-- Create Members Table
+CREATE TABLE Members (
+    MemberID INT AUTO_INCREMENT PRIMARY KEY,
+    Name VARCHAR(255) NOT NULL,
+    Address VARCHAR(255),
+    Phone VARCHAR(20),
+    Email VARCHAR(100) UNIQUE
+);
+
+-- Create Transactions Table
+CREATE TABLE Transactions (
+    TransactionID INT AUTO_INCREMENT PRIMARY KEY,
+    BookID INT,
+    MemberID INT,
+    IssueDate DATE,
+    ReturnDate DATE,
+    Status ENUM('Issued', 'Returned') DEFAULT 'Issued',
+    FOREIGN KEY (BookID) REFERENCES Books(BookID),
+    FOREIGN KEY (MemberID) REFERENCES Members(MemberID)
+);
+
+-- Insert Books
+INSERT INTO Books (Title, Author, Genre, PublishedYear, CopiesAvailable) VALUES
+('The Great Gatsby', 'F. Scott Fitzgerald', 'Fiction', 1925, 5),
+('To Kill a Mockingbird', 'Harper Lee', 'Fiction', 1960, 3);
+
+-- Insert Members
+INSERT INTO Members (Name, Address, Phone, Email) VALUES
+('John Doe', '123 Elm St', '123-456-7890', 'john.doe@example.com'),
+('Jane Smith', '456 Oak St', '987-654-3210', 'jane.smith@example.com');
+
+-- Insert Transactions
+INSERT INTO Transactions (BookID, MemberID, IssueDate, ReturnDate, Status) VALUES
+(1, 1, '2024-06-01', NULL, 'Issued'),
+(2, 2, '2024-06-02', NULL, 'Issued');
+
+-- Update a Book's Copies Available
+UPDATE Books SET CopiesAvailable = 4 WHERE BookID = 1;
+
+-- Update a Member's Address
+UPDATE Members SET Address = '789 Pine St' WHERE MemberID = 1;
+
+-- Update a Transaction's Return Date and Status
+UPDATE Transactions SET ReturnDate = '2024-06-10', Status = 'Returned' WHERE TransactionID = 1;
+
+-- Retrieve all Books
+SELECT * FROM Books;
+
+-- Retrieve all Members
+SELECT * FROM Members;
+
+-- Retrieve all Transactions
+SELECT * FROM Transactions;
+
+-- Retrieve Books issued to a particular Member
+SELECT b.Title, t.IssueDate
+FROM Transactions t
+JOIN Books b ON t.BookID = b.BookID
+WHERE t.MemberID = 1 AND t.Status = 'Issued';
+
+-- Retrieve all Members who have not returned Books
+SELECT m.Name, b.Title, t.IssueDate
+FROM Transactions t
+JOIN Members m ON t.MemberID = m.MemberID
+JOIN Books b ON t.BookID = b.BookID
+WHERE t.Status = 'Issued';
+
+-- Delete a Book
+DELETE FROM Books WHERE BookID = 2;
+
+-- Delete a Member
+DELETE FROM Members WHERE MemberID = 2;
+
+-- Delete a Transaction
+DELETE FROM Transactions WHERE TransactionID = 2;
+
+SELECT*
+FROM Books;
+
+SELECT*
+FROM Members;
+
+select*
+FROM Transactions;
