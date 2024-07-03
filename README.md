@@ -1,9 +1,9 @@
-**Name:**Bharti Saini
-**Company:**CODTECH IT SOLUTIONS
-**ID:**CTO8DS3669
-**Domain:**SQL
-**Duration:**1st July to 1st August
-**Mentor:**
+Name:Bharti Saini
+Company:CODTECH IT SOLUTIONS
+ID:CTO8DS3669
+Domain:SQL
+Duration:1st July to 1st August
+Mentor:
 
 
 ## Overview of the project
